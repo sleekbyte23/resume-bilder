@@ -93,9 +93,21 @@ export default function Dashboard() {
             <p className="text-muted-foreground">Welcome back, {profile?.full_name || user?.email}</p>
           </div>
           <div className="flex items-center gap-4">
+            <Button variant="outline" onClick={() => navigate('/')} size="sm">
+              Home
+            </Button>
+            <Button variant="outline" onClick={() => navigate('/blogs')} size="sm">
+              Blog
+            </Button>
+            <Button variant="outline" onClick={() => navigate('/about')} size="sm">
+              About
+            </Button>
+            <Button variant="outline" onClick={() => navigate('/help')} size="sm">
+              Help
+            </Button>
             <Button onClick={handleCreateResume} className="bg-primary hover:bg-primary/90">
               <Plus className="w-4 h-4 mr-2" />
-              Create New Resume
+              Create Resume
             </Button>
             <Button variant="outline" onClick={signOut}>
               Sign Out

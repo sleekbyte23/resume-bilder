@@ -386,8 +386,17 @@ const Index = () => {
                   <Button variant="outline" onClick={() => setShowResumes(true)} className="hover:bg-blue-50">
                     My Resumes
                   </Button>
-                  <Button variant="outline" onClick={() => window.location.href = '/blog'} className="hover:bg-blue-50">
+                  <Button variant="outline" onClick={() => window.location.href = '/dashboard'} className="hover:bg-blue-50">
+                    Dashboard
+                  </Button>
+                  <Button variant="outline" onClick={() => window.location.href = '/blogs'} className="hover:bg-blue-50">
                     Blog
+                  </Button>
+                  <Button variant="outline" onClick={() => window.location.href = '/about'} className="hover:bg-blue-50">
+                    About
+                  </Button>
+                  <Button variant="outline" onClick={() => window.location.href = '/help'} className="hover:bg-blue-50">
+                    Help
                   </Button>
                   <Button variant="outline" onClick={signOut}>
                     Sign Out
@@ -682,9 +691,9 @@ const Index = () => {
           </div>
           <p className="text-gray-400 mb-4">&copy; 2025 Resume Pilot. Where Resumes Take Off.</p>
           <div className="flex justify-center space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Support</a>
+            <a href="/about" className="hover:text-white transition-colors">About Us</a>
+            <a href="/blogs" className="hover:text-white transition-colors">Blog</a>
+            <a href="/help" className="hover:text-white transition-colors">Help</a>
           </div>
         </div>
       </footer>
