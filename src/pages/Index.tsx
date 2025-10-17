@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, CircleCheck as CheckCircle, Star, Users, FileText, Brain, Sparkles, Zap, Shield, Globe, Plus, CreditCard as Edit, Eye, Download, Trash2, Calendar, Clock, TrendingUp } from "lucide-react";
+import { ArrowRight, CircleCheck as CheckCircle, Star, Users, FileText, Brain, Sparkles, Zap, Shield, Globe, Plus, CreditCard as Edit, Eye, Download, Trash2, Calendar, Clock, TrendingUp, Award, Target, Briefcase, ChevronRight } from "lucide-react";
 import ResumeBuilder from "@/components/ResumeBuilder";
 import SignInModal from "@/components/auth/SignInModal";
 import ResumeManager from "@/components/resume/ResumeManager";
@@ -19,6 +20,7 @@ import { calculateATSScore } from "@/utils/atsChecker";
 import { format } from 'date-fns';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [showBuilder, setShowBuilder] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   // LINKEDIN INTEGRATION - COMMENTED OUT FOR FUTURE USE
@@ -362,50 +364,59 @@ const Index = () => {
         }}
       /> */}
       {/* Header */}
-      <header className="relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
-        <div className="container mx-auto px-4 py-6 relative">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <img 
-                src="/upscalemedia-transformed.png" 
-                alt="Resume Pilot Logo" 
-                className="w-12 h-12 object-contain"
+            <div className="flex items-center space-x-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <img
+                src="/upscalemedia-transformed.png"
+                alt="Resume Pilot Logo"
+                className="w-10 h-10 object-contain"
               />
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
                   Resume Pilot
                 </h1>
                 <p className="text-xs text-gray-500">Where Resumes Take Off</p>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4">
               {user ? (
                 <>
-                  <span className="text-gray-600 font-medium">Welcome, {user.email?.split('@')[0]}!</span>
-                  <Button variant="outline" onClick={() => setShowResumes(true)} className="hover:bg-blue-50">
+                  <Button variant="ghost" onClick={() => setShowResumes(true)} className="hover:bg-blue-50 font-medium">
                     My Resumes
                   </Button>
-                  <Button variant="outline" onClick={() => window.location.href = '/dashboard'} className="hover:bg-blue-50">
+                  <Button variant="ghost" onClick={() => navigate('/dashboard')} className="hover:bg-blue-50 font-medium">
                     Dashboard
                   </Button>
-                  <Button variant="outline" onClick={() => window.location.href = '/blogs'} className="hover:bg-blue-50">
+                  <Button variant="ghost" onClick={() => navigate('/blogs')} className="hover:bg-blue-50 font-medium">
                     Blog
                   </Button>
-                  <Button variant="outline" onClick={() => window.location.href = '/about'} className="hover:bg-blue-50">
+                  <Button variant="ghost" onClick={() => navigate('/about')} className="hover:bg-blue-50 font-medium">
                     About
                   </Button>
-                  <Button variant="outline" onClick={() => window.location.href = '/help'} className="hover:bg-blue-50">
+                  <Button variant="ghost" onClick={() => navigate('/help')} className="hover:bg-blue-50 font-medium">
                     Help
                   </Button>
-                  <Button variant="outline" onClick={signOut}>
-                    Sign Out
-                  </Button>
+                  <div className="flex items-center space-x-3 ml-2 pl-4 border-l border-gray-200">
+                    <span className="text-sm text-gray-600">Hi, {user.email?.split('@')[0]}</span>
+                    <Button variant="outline" onClick={signOut} size="sm">
+                      Sign Out
+                    </Button>
+                  </div>
                 </>
               ) : (
-                <Button variant="outline" onClick={() => window.location.href = '/auth'} className="hover:bg-blue-50">
-                  Sign In
-                </Button>
+                <>
+                  <Button variant="ghost" onClick={() => navigate('/about')} className="hover:bg-blue-50 font-medium">
+                    About
+                  </Button>
+                  <Button variant="ghost" onClick={() => navigate('/help')} className="hover:bg-blue-50 font-medium">
+                    Help
+                  </Button>
+                  <Button onClick={() => navigate('/auth')} className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700">
+                    Get Started
+                  </Button>
+                </>
               )}
             </div>
           </nav>
@@ -559,6 +570,54 @@ const Index = () => {
         </div>
       </section> */}
 
+      {/* How It Works Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                How It Works
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Create your professional resume in three simple steps
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-12 mb-16">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-teal-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                  <span className="text-3xl font-bold text-white">1</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Choose Your Path</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Start from scratch with our guided builder or select from professional templates tailored to your industry.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                  <span className="text-3xl font-bold text-white">2</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Build & Optimize</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Add your information with AI-powered suggestions. Get real-time ATS score feedback and optimization tips.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                  <span className="text-3xl font-bold text-white">3</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Download & Apply</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Export your polished resume as PDF and start applying to your dream jobs with confidence.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Enhanced Features Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
@@ -682,18 +741,194 @@ const Index = () => {
       {/* Template Showcase */}
       <TemplateShowcase />
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <div className="flex items-center justify-center space-x-3 mb-6">
-            <img src="/upscalemedia-transformed.png" alt="Resume Pilot" className="w-8 h-8" />
-            <span className="text-xl font-bold">Resume Pilot</span>
+      {/* Testimonials Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Trusted by Professionals Worldwide
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Join thousands who have successfully landed their dream jobs
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+                <CardContent className="pt-6">
+                  <div className="flex items-center mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-4 leading-relaxed">
+                    "Resume Pilot helped me create a professional resume in under 15 minutes. The ATS optimization feature gave me confidence that my resume would actually be seen by recruiters."
+                  </p>
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-white font-bold">SJ</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Sarah Johnson</p>
+                      <p className="text-sm text-gray-600">Software Engineer</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+                <CardContent className="pt-6">
+                  <div className="flex items-center mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-4 leading-relaxed">
+                    "The AI writing assistant is a game-changer. It helped me articulate my accomplishments in a way that really stands out. Got three interview calls within a week!"
+                  </p>
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-blue-500 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-white font-bold">MC</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Michael Chen</p>
+                      <p className="text-sm text-gray-600">Marketing Manager</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+                <CardContent className="pt-6">
+                  <div className="flex items-center mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-4 leading-relaxed">
+                    "As a career changer, I needed a resume that highlighted transferable skills. The templates and guidance made it easy to present myself professionally."
+                  </p>
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-white font-bold">EP</span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900">Emily Parker</p>
+                      <p className="text-sm text-gray-600">Product Designer</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-          <p className="text-gray-400 mb-4">&copy; 2025 Resume Pilot. Where Resumes Take Off.</p>
-          <div className="flex justify-center space-x-6 text-sm text-gray-400">
-            <a href="/about" className="hover:text-white transition-colors">About Us</a>
-            <a href="/blogs" className="hover:text-white transition-colors">Blog</a>
-            <a href="/help" className="hover:text-white transition-colors">Help</a>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-24 bg-gradient-to-br from-teal-600 to-blue-600">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-4 gap-8 text-center text-white">
+              <div>
+                <Award className="w-12 h-12 mx-auto mb-4 opacity-90" />
+                <div className="text-4xl font-bold mb-2">50K+</div>
+                <p className="text-blue-100">Resumes Created</p>
+              </div>
+              <div>
+                <Target className="w-12 h-12 mx-auto mb-4 opacity-90" />
+                <div className="text-4xl font-bold mb-2">87%</div>
+                <p className="text-blue-100">Interview Rate</p>
+              </div>
+              <div>
+                <Briefcase className="w-12 h-12 mx-auto mb-4 opacity-90" />
+                <div className="text-4xl font-bold mb-2">40+</div>
+                <p className="text-blue-100">Industries Served</p>
+              </div>
+              <div>
+                <Users className="w-12 h-12 mx-auto mb-4 opacity-90" />
+                <div className="text-4xl font-bold mb-2">15K+</div>
+                <p className="text-blue-100">Jobs Landed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-4 gap-12 mb-12">
+              <div className="md:col-span-2">
+                <div className="flex items-center space-x-3 mb-4">
+                  <img src="/upscalemedia-transformed.png" alt="Resume Pilot" className="w-10 h-10" />
+                  <span className="text-2xl font-bold">Resume Pilot</span>
+                </div>
+                <p className="text-gray-400 mb-4 leading-relaxed">
+                  Empowering professionals to create outstanding resumes with AI-powered tools. Where your career journey takes flight.
+                </p>
+                <div className="flex space-x-4">
+                  <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-colors cursor-pointer">
+                    <Globe className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Product</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <a href="#" onClick={(e) => { e.preventDefault(); handleQuickStart(); }} className="text-gray-400 hover:text-white transition-colors">
+                      Resume Builder
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                      Templates
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                      ATS Checker
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Company</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <button onClick={() => navigate('/about')} className="text-gray-400 hover:text-white transition-colors text-left">
+                      About Us
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => navigate('/blogs')} className="text-gray-400 hover:text-white transition-colors text-left">
+                      Blog
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => navigate('/help')} className="text-gray-400 hover:text-white transition-colors text-left">
+                      Help Center
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="border-t border-gray-800 pt-8">
+              <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p className="text-gray-400 text-sm">
+                  &copy; 2025 Resume Pilot. Where Resumes Take Off. All rights reserved.
+                </p>
+                <div className="flex space-x-6 text-sm">
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
